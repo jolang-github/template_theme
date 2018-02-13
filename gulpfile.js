@@ -68,10 +68,9 @@ gulp.task('clean', function() {
 });
 
 
-
 // Default task
-gulp.task('default', ['clean'], function() {
-    gulp.start('images', 'scripts',  'styles');
+gulp.task('default', function() {
+    gulp.start('images', 'scripts',  'styles', 'bowerstyles');
 });
 
 
