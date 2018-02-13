@@ -25,14 +25,12 @@ gulp.task('images', function() {
 
 //Scripts
 gulp.task('scripts', function() {
-    return gulp.src(['scripts/*.js'])
-    //.pipe(jshint('.jshintrc'))
-    //.pipe(jshint.reporter('default'))
+    return gulp.src(['bower_components/jquery/dist/jquery.min.js', 'js/*.js' ])
     .pipe(concat('scripts.js'))
     .pipe(gulp.dest('js'))
     .pipe(rename({suffix: '.min'}))
     .pipe(uglify())
-    .pipe(gulp.dest('js'))
+    .pipe(gulp.dest('js/min'))
     .pipe(notify({ message: 'Scripts task complete' }));
 });
 
@@ -49,24 +47,23 @@ gulp.task('styles', function() {
      .pipe(notify({ message: 'Styles task complete' }));
  });
 
-/*
+
 //Move 'bower_components' styles to 'assets'
 gulp.task('bowerstyles', function() {
     return gulp.src(['./bower_components/bootstrap/dist/css/bootstrap.css', './bower_components/fontawesome/css/font-awesome.css'])
     .pipe(gulp.dest('./css'));
 });
-*/
 
 //Move 'bower_components' fonts to 'assets'
-// gulp.task('bowerfonts', function() {
-//     return gulp.src(['./bower_components/bootstrap/dist/fonts/**/*.{ttf,woff,eot,svg,otf}', './bower_components/fontawesome/fonts/**/*.{ttf,woff,eot,svg,otf}'])
-//     .pipe(gulp.dest('./fonts'));
-// });
+gulp.task('bowerfonts', function() {
+    return gulp.src(['./bower_components/bootstrap/dist/fonts/**/*.{ttf,woff,eot,svg,otf}', './bower_components/fontawesome/fonts/**/*.{ttf,woff,eot,svg,otf}'])
+    .pipe(gulp.dest('./fonts'));
+});
 
 
 // Clean. Delete and replace all files in the destination folder.
 gulp.task('clean', function() {
-  return gulp.src(['assets/css', 'assets/js', 'assets/images', 'assets/fonts'], {read: false})
+  return gulp.src(['css', 'js', 'images', 'fonts'], {read: false})
     .pipe(clean());
 });
 
@@ -90,7 +87,7 @@ gulp.task('watch', function() {
   // Create LiveReload server
   var server = livereload();
 
-  // Watch any files in assets/, reload on change
+  // Watch any files scripts, reload on change
   gulp.watch(['scripts/**', 'index.html']).on('change', function(file) {
     server.changed(file.path);
   });
