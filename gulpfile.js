@@ -25,7 +25,7 @@ gulp.task('images', function() {
 
 //Scripts
 gulp.task('scripts', function() {
-    return gulp.src(['bower_components/jquery/dist/jquery.min.js', 'js/*.js' ])
+    return gulp.src(['bower_components/jquery/dist/jquery.min.js', 'bower_components/bootstrap/dist/js/bootstrap.min.js', 'js/*.js' ])
     .pipe(concat('scripts.js'))
     .pipe(gulp.dest('js'))
     .pipe(rename({suffix: '.min'}))
@@ -50,7 +50,7 @@ gulp.task('styles', function() {
 
 //Move 'bower_components' styles to 'assets'
 gulp.task('bowerstyles', function() {
-    return gulp.src(['./bower_components/bootstrap/dist/css/bootstrap.css', './bower_components/fontawesome/css/font-awesome.css'])
+    return gulp.src(['./bower_components/bootstrap/dist/css/bootstrap.min.css', './bower_components/fontawesome/css/font-awesome.min.css'])
     .pipe(gulp.dest('./css'));
 });
 
